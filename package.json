@@ -1,0 +1,19 @@
+{
+  "name": "sistema-recursos-humanos",
+  "version": "1.0.0",
+  "description": "Proyecto Final Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "nodejs"
+  ],
+  "author": "Marlon Calderon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
