@@ -1,12 +1,38 @@
+//dependencias
+const morgan = require('morgan');
 const express = require('express');
 const app = express();
+const db = require('../Sistema Recursos Humanos/config/database');
+
+//routes
+const empleado = require('./routes/empleado')
+const user = require('./routes/user');
+
+//middleware
+const cors = require('./middleware/cors');
+const auth = require('./middleware/auth');
+const index = require('./middleware/index');
+const notFound = require('./middleware/notFound');
 
 
-app.get("/", (req, res, next)=> {
-    res.status(200);
-    res.send("Bienvenido");
-});
+app.use(cors);
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/consulta",empleado)
+
+/*app.get("/consulta",async (req,res,next)=>{
+    const rh = await db.query("SELECT * FROM empleado");
+    return res.send(rh);
+ });*/
+
+//app.use("/user",user);
+//app.use(auth);
+//app.use(notFound);
+
 
 app.listen(3000, () =>  {
     console.log("Server Running ...");
 });
+
