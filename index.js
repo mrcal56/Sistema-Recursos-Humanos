@@ -2,7 +2,6 @@
 const morgan = require('morgan');
 const express = require('express');
 const app = express();
-const db = require('../Sistema Recursos Humanos/config/database');
 
 //routes
 const empleado = require('./routes/empleado')
@@ -20,7 +19,14 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.get("/",index);
+app.use("/user",user);
+app.use(auth);
 app.use("/consulta",empleado)
+app.use(notFound);
+
+
 
 /*app.get("/consulta",async (req,res,next)=>{
     const rh = await db.query("SELECT * FROM empleado");
@@ -31,8 +37,6 @@ app.use("/consulta",empleado)
 //app.use(auth);
 //app.use(notFound);
 
-
-app.listen(3000, () =>  {
-    console.log("Server Running ...");
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server is running");
 });
-

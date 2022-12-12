@@ -3,10 +3,10 @@ const empleado = express.Router();
 const db = require('../config/database')
 
 empleado.post('/',async(req,res,next)=>{
-    const { emp_id, nombre, apellidos, telefono, correo, direccion } = req.body;
-    if(emp_id && nombre && apellidos && telefono && correo && direccion){
-        let query = "INSERT INTO empleado (emp_id, nombre, apellidos, telefono, correo, direccion)";
-        query += ` VALUES('${emp_id}'  , ${nombre}, ${apellidos}, ${telefono}, ${correo}, ${direccion})`;
+    const { nombre, apellidos, telefono, correo, direccion } = req.body;
+    if(nombre && apellidos && telefono && correo && direccion){
+        let query = "INSERT INTO empleado ( nombre, apellidos, telefono, correo, direccion)";
+        query += ` VALUES('${nombre}', '${apellidos}', '${telefono}', '${correo}', '${direccion}')`;
         const rows = await db.query(query);
         if(rows.affectedRows == 1 ){
             return res.status(201).json({code : 201, message : "empleado insertado correctamente"});
@@ -53,15 +53,15 @@ empleado.patch("/:id([0-9]{1,3})",async(req, res,next)=>{
         if(rows.affectedRows == 1 ){
             return res.status(200).json({code : 200, message : "empleado actualizado correctamente"});
         }
-        return res.status(500).json({code: 500, message: "Ocurrio un error "})
+        return res.status(500).json({code: 500, message: "Ocurrio un error "});
     }
-    return res.status(500).json({code:500, message: "Campos incompletos "})
+    return res.status(500).json({code:500, message: "Campos incompletos "});
 });
 
 
 empleado.get("/",async (req,res,next)=>{
    const emp = await db.query("SELECT * FROM empleado");
-   return res.send(emp);
+   return res.status(200).json({code: 1, message: emp});
 });
 
 empleado.get('/:id([0-9]{1,3})',async (req, res, next)=>{
@@ -75,7 +75,7 @@ empleado.get('/:id([0-9]{1,3})',async (req, res, next)=>{
 
 empleado.get('/:name([A-Za-z]+)',async(req,res,next)=>{
     const name = req.params.name;
-    const emp = await db.query("SELECT * FROM empleado WHERE emp_id='"+name+"';");
+    const emp = await db.query("SELECT * FROM empleado WHERE nombre='"+name+"';");
 
     if(emp.length > 0){
         return res.status(200).json({code: 1, message: emp});
