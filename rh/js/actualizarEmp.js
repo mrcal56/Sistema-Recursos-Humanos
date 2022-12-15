@@ -31,11 +31,11 @@ function modificarEmp(empleado){
         <div class="col-6 offset-3">
             <div class="form-group">
                 <label for="input-id">Id</label>
-                <input type="hidden" class="form-control" id="input-id" value=${empleado.emp_id}>
+                <input type="hidden" class="form-control" id="input-id" value=${empleado[0].emp_id}>
             </div>
             <div class="form-group">
                 <label for="input-name">Nombre</label>
-                <input type="text" class="form-control" id="input-name" value=${empleado[i].nombre}>
+                <input type="text" class="form-control" id="input-name" value=${empleado[0].nombre}>
             </div>
             <div class="form-group">
                 <label for="input-apellido">Apellido</label>

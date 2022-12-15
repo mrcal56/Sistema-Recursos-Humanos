@@ -28,15 +28,6 @@ app.use(notFound);
 
 
 
-/*app.get("/consulta",async (req,res,next)=>{
-    const rh = await db.query("SELECT * FROM empleado");
-    return res.send(rh);
- });*/
-
-//app.use("/user",user);
-//app.use(auth);
-//app.use(notFound);
-
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running");
 });
